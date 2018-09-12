@@ -4,6 +4,7 @@ import com.mongodb.*;
 
 import java.net.UnknownHostException;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,9 +14,9 @@ public class TestController {
 
 	private static final String MONGO_HOST = "localhost";
 	private static final Integer MONGO_PORT = 27017;
-	private static final String MONGO_USERNAME = "test";
-	private static final String MONGO_PASSWORD = "1234";
-	private static final String MONGO_DB_NAME = "mongo-db-test";
+	private static final String MONGO_DB_NAME = "admin";
+	private static final String MONGO_USERNAME = "admin";
+	private static final String MONGO_PASSWORD = "123456";
 	private static final String MONGO_COLLECTION_NAME = "mongo-collection-test";
 
 
@@ -24,12 +25,12 @@ public class TestController {
 		// 获取Mongo客户端
 		MongoClient mongoClient = new MongoClient(MONGO_HOST, MONGO_PORT);
 		/**
-		 * 1.获取所有db名称并打印（mongodb未开启auth认证下可用）
+		 * 1.获取所有db名称并打印（MongoDB未开启auth权限认证下可用）
 		 */
-		/*List<String> databaseNames = mongoClient.getDatabaseNames();
+		/*List<String> dbs = mongoClient.getDatabaseNames();
 		System.out.println(MONGO_HOST + ":" + MONGO_PORT.toString() + "包含如下数据库：");
-		for (String databaseName : databaseNames) {
-			System.out.println(databaseName);
+		for (String db : dbs) {
+			System.out.println(db);
 		}*/
 
 		/**
@@ -54,9 +55,10 @@ public class TestController {
 		// 2.3获取指定集合(若不存在，则mongo会创建该集合)
 		DBCollection collection = db.getCollection(MONGO_COLLECTION_NAME);
 
+
 		/**
 		 * 3.增删查改
-		 */
+ 		 */
 		// 3.1插入一条文档
 		BasicDBObject document = new BasicDBObject();
 		document.put("name", "Cheung");
